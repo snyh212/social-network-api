@@ -1,0 +1,1 @@
+// require user & thought models
