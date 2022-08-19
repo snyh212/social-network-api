@@ -30,5 +30,14 @@ app.get('/:id', ({ params }, res) => {
     })
 });
 // Post a new User
+app.post('/', ({ body }, res) => {
+    User.create(body)
+        .then(userData => {
+            res.json(userData);
+        })
+        .catch(err => {
+            res.json(err);
+        });
+});
 // Update with put
 // delete user by _id
