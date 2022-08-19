@@ -17,8 +17,9 @@ const reactionSchema = new Schema({
     },
     createdAt: {
         type: Date,
-        default: Date.now(),
-        get: (val) => formatDate(val)
+        get: (date) => {
+          if (date) return date.toISOString().split("T") [0];
+        }
     },
 },
 {
@@ -39,8 +40,9 @@ const thoughtSchema = new Schema({
     // createdAt
     createdAt: {
         type: Date,
-        default: Date.now(),
-        get: (val) => formatDate(val)
+        get: (date) => {
+          if (date) return date.toISOString().split("T") [0];
+        }
     },
     // username
     username: {
@@ -51,20 +53,13 @@ const thoughtSchema = new Schema({
     reactions: [reactionSchema]
 },
 {
+    timestamps: true,
     toJSON: {
         getters: true,
         virtuals: true,
     },
     id: false
 })
-
-function formatDate() {
-    console.log(`The current date is ${this.createdAt}`)
-}
-
-
-
-
 
 thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length
