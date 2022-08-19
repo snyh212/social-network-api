@@ -108,3 +108,5 @@ app.delete('/:id/friends/:friendId', ({ params }, res) => {
         res.status(400).json(err);
       });
 }); 
+
+module.exports = app
